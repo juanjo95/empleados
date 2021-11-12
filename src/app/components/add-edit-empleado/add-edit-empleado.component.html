@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <h2 class="text-center">{{accion}} Empleado</h2>
+    </div>
+  </div>
+  <!-- <pre>{{myForm.value | json}}</pre> -->
+  <div class="row d-flex justify-content-center">
+    <div class="col-sm-12 col-md-5 col-lg-4 mb-5">
+      <form autocomplete="off" [formGroup]="myForm">
+        <div class="col-lg-12">
+          <mat-form-field class="w-100 fs-6">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput formControlName="nombre">
+          </mat-form-field>
+          <div *ngIf="myForm.controls['nombre'].hasError('required') && myForm.controls['nombre'].touched" style="margin-top: -20px"><span class="text-danger">Este campo es <strong>obligatorio</strong></span></div>
+          <div *ngIf="myForm.controls['nombre'].hasError('maxlength') && myForm.controls['nombre'].touched" style="margin-top: -20px"><span class="text-danger">Este campo debe tener como maximo <strong>20 caracteres</strong></span></div>
+        </div>
+        <div class="col-lg-12">
+          <mat-form-field class="w-100 fs-6">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="correo">
+          </mat-form-field>
+          <div *ngIf="myForm.controls['correo'].hasError('required') && myForm.controls['correo'].touched" style="margin-top: -20px"><span class="text-danger">Este campo es <strong>obligatorio</strong></span></div>
+          <div *ngIf="myForm.controls['correo'].hasError('email') && myForm.controls['correo'].touched" style="margin-top: -20px"><span class="text-danger">No corresponde a un correo valido</span></div>
+        </div>
+        <br>
+        <br>
+        <div class="col-lg-12">
+          <mat-form-field class="example-full-width" class="w-100 fs-6">
+            <mat-label>Fecha ingreso</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaIngreso">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+          <div *ngIf="myForm.controls['fechaIngreso'].hasError('required') && myForm.controls['fechaIngreso'].touched" style="margin-top: -20px"><span class="text-danger">Este campo es <strong>obligatorio</strong></span></div>
+        </div>
+        <div class="col-lg-12">
+          <mat-form-field class="w-100 fs-6">
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="telefono">
+          </mat-form-field>
+        </div>
+        <div *ngIf="myForm.controls['telefono'].hasError('required') && myForm.controls['telefono'].touched" style="margin-top: -20px"><span class="text-danger">Este campo es <strong>obligatorio</strong></span></div>
+        <div *ngIf="myForm.controls['telefono'].hasError('maxlength') && myForm.controls['telefono'].touched" style="margin-top: -20px"><span class="text-danger">Este campo debe tener como maximo <strong>10 numeros</strong></span></div>
+        <div class="col-lg-12">
+          <mat-form-field class="w-100 fs-6">
+            <mat-label>Estado civil</mat-label>
+            <mat-select formControlName="estadoCivil">
+              <mat-option *ngFor="let estado of estadosCiviles" [value]="estado">
+                {{estado}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="myForm.controls['estadoCivil'].hasError('required') && myForm.controls['estadoCivil'].touched" style="margin-top: -20px"><span class="text-danger">Este campo es <strong>obligatorio</strong></span></div>
+        </div>
+        <div class="col-lg-12">
+          <mat-radio-group aria-label="Seleccione el sexo..." class="d-flex justify-content-evenly align-items-center" formControlName="sexo">
+            <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+            <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+          </mat-radio-group>
+          <div *ngIf="myForm.controls['sexo'].hasError('required') && myForm.controls['sexo'].touched" style="margin-top: -20px"><span class="text-danger">Este campo es <strong>obligatorio</strong></span></div>
+        </div>
+        <br>
+        <div class="col-lg-12 d-flex justify-content-end align-items-center">
+          <button class="btn btn-secondary btn-md mx-2" type="button" routerLink="/">Cancelar</button>
+          <button class="btn boton-aceptar btn-md" type="button" (click)="guardarEmpleado()" [disabled]="myForm.invalid">Aceptar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 offset-lg-2">
+      <img src="../../../assets/img/crear-usuario.jpg" class="w-100">
+    </div>
+  </div>
+</div>
